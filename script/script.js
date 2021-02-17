@@ -16,8 +16,12 @@ let cell9 = document.getElementById("cell9");
 
 let currentCell;
 
-let xMoves =[]
-let oMoves = []
+//player moves array
+let xMoves = [];
+let oMoves = [];
+//total player moves array
+let totalMoves = [];
+
 //board object//
 let gameBoard = {
   cell1: "X",
@@ -37,20 +41,84 @@ let gameBoard = {
       if (currentPlayer === "X") {
         event.target.textContent = "X";
         currentPlayer = "O";
-        xMoves.push(event.target)
-        console.log(xMoves)
+        xMoves.push(event.target);
+        totalMoves.push(event.target);
+        console.log(xMoves);
       } else if (currentPlayer === "O") {
         event.target.textContent = "O";
         currentPlayer = "X";
+        oMoves.push(event.target);
+        totalMoves.push(event.target);
       }
+      checkWin();
+
       console.log(event.target);
     } else alert("You can't play there!");
-}
+  },
 };
+
+//functions
+
+function checkWin() {
+  //check to see if the player has a winning combination
+  if (
+    (xMoves.includes(cell1) &&
+      xMoves.includes(cell2) &&
+      xMoves.includes(cell3)) ||
+    (xMoves.includes(cell4) &&
+      xMoves.includes(cell5) &&
+      xMoves.includes(cell6)) ||
+    (xMoves.includes(cell7) &&
+      xMoves.includes(cell8) &&
+      xMoves.includes(cell9)) ||
+    (xMoves.includes(cell1) &&
+      xMoves.includes(cell4) &&
+      xMoves.includes(cell7)) ||
+    (xMoves.includes(cell2) &&
+      xMoves.includes(cell5) &&
+      xMoves.includes(cell8)) ||
+    (xMoves.includes(cell3) &&
+      xMoves.includes(cell6) &&
+      xMoves.includes(cell9)) ||
+    (xMoves.includes(cell1) &&
+      xMoves.includes(cell5) &&
+      xMoves.includes(cell9)) ||
+    (xMoves.includes(cell3) && xMoves.includes(cell5) && xMoves.includes(cell7))
+  ) {
+    alert(`PlayerX Won`);
+  } else if (
+    (oMoves.includes(cell1) &&
+      oMoves.includes(cell2) &&
+      oMoves.includes(cell3)) ||
+    (oMoves.includes(cell4) &&
+      oMoves.includes(cell5) &&
+      oMoves.includes(cell6)) ||
+    (oMoves.includes(cell7) &&
+      oMoves.includes(cell8) &&
+      oMoves.includes(cell9)) ||
+    (oMoves.includes(cell1) &&
+      oMoves.includes(cell4) &&
+      oMoves.includes(cell7)) ||
+    (oMoves.includes(cell2) &&
+      oMoves.includes(cell5) &&
+      oMoves.includes(cell8)) ||
+    (oMoves.includes(cell3) &&
+      oMoves.includes(cell6) &&
+      oMoves.includes(cell9)) ||
+    (oMoves.includes(cell1) &&
+      oMoves.includes(cell5) &&
+      oMoves.includes(cell9)) ||
+    (oMoves.includes(cell3) && xMoves.includes(cell5) && xMoves.includes(cell7))
+  ) {
+    alert(`PlayerO Won`);
+  } else if (totalMoves.length === 9) {
+    alert(`Tie`);
+  }
+}
+
 //event handlers
 
 start.addEventListener("click", startFun);
-
 
 function startFun(event) {
   for (let cell of allCells) {
