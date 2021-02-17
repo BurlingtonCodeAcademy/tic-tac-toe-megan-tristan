@@ -3,6 +3,7 @@ let currentPlayer = "X";
 let allCells = document.querySelectorAll(".cell");
 let otherPlayer = "";
 let start = document.getElementById("start");
+let playerTurn = document.getElementById("player-turn")
 
 let cell1 = document.getElementById("cell1");
 let cell2 = document.getElementById("cell2");
@@ -37,14 +38,21 @@ let gameBoard = {
       if (currentPlayer === "X") {
         event.target.textContent = "X";
         currentPlayer = "O";
+        playerTurn.innerHTML = "O"
         xMoves.push(event.target)
         console.log(xMoves)
       } else if (currentPlayer === "O") {
         event.target.textContent = "O";
         currentPlayer = "X";
+        playerTurn.innerHTML = "X"
       }
       console.log(event.target);
     } else alert("You can't play there!");
+},
+checkWin () {
+    if (xMoves.includes("cell3")) {
+        alert("You won!")
+    }
 }
 };
 //event handlers
