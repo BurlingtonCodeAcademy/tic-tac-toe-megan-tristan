@@ -19,3 +19,14 @@ body {
   border: 1px solid #b07289;
   border-radius: 7%;
 }
+
+body {
+  justify-content: center;
+  align-items: center;
+  font-family: Avenir; 
+}
+
+#title-container {
+  display: flex; 
+  align-self: center;
+}
