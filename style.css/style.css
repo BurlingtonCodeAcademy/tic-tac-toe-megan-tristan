@@ -1,5 +1,8 @@
 body {
   background-color: #d1f3de;
+  justify-content: center;
+  align-items: center;
+  font-family: Avenir; 
 }
 
 /*Game Board*/
@@ -20,13 +23,21 @@ body {
   border-radius: 7%;
 }
 
-body {
-  justify-content: center;
-  align-items: center;
-  font-family: Avenir; 
-}
 
 #title-container {
-  display: flex; 
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
   align-self: center;
+}
+
+#id {
+  grid-row: 1; 
+}
+
+#status {
+  grid-row: 2; 
+}
+
+#player-turn{
+  grid-row: 3; 
 }

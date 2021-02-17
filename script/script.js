@@ -42,16 +42,6 @@ let gameBoard = {
       if (currentPlayer === "X") {
         event.target.textContent = "X";
         currentPlayer = "O";
-<<<<<<< HEAD
-        xMoves.push(event.target);
-        totalMoves.push(event.target);
-        console.log(xMoves);
-      } else if (currentPlayer === "O") {
-        event.target.textContent = "O";
-        currentPlayer = "X";
-        oMoves.push(event.target);
-        totalMoves.push(event.target);
-=======
         playerTurn.innerHTML = "O"
         xMoves.push(event.target)
         console.log(xMoves)
@@ -59,22 +49,12 @@ let gameBoard = {
         event.target.textContent = "O";
         currentPlayer = "X";
         playerTurn.innerHTML = "X"
->>>>>>> d45535a598c6f44317bfe2ec931b9ae6dcd80af1
       }
       checkWin();
 
       console.log(event.target);
     } else alert("You can't play there!");
-<<<<<<< HEAD
-  },
-=======
 },
-checkWin () {
-    if (xMoves.includes("cell3")) {
-        alert("You won!")
-    }
-}
->>>>>>> d45535a598c6f44317bfe2ec931b9ae6dcd80af1
 };
 
 //functions
