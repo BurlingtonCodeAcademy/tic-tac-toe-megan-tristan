@@ -56,13 +56,13 @@ let gameBoard = {
 }
 
 //functions
-winningCombos = [[cell1, cell2, cell3], [cell4, cell5, cell6]]
+/*winningCombos = [[cell1, cell2, cell3], [cell4, cell5, cell6]]
 //xMoves & oMoves change to array of cell strings 
 for (let i=0; i<winningCombos.length; i++) {
   if xMoves.includes(winningCombos[i]) {
     xWin()
   } else if yMoves 
-}
+}*/
 function checkWin() {
   //check to see if the player has a winning combination
   if (
