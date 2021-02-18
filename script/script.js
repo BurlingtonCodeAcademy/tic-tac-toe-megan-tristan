@@ -42,12 +42,14 @@ let gameBoard = {
         event.target.textContent = "X";
         currentPlayer = "O";
         playerTurn.innerHTML = "It's " + player2.value + "'s turn";
-        xMoves.push(event.target)
+        xMoves.push(event.target);
+        totalMoves.push(event.target); 
       } else if (currentPlayer === "O") {
         event.target.textContent = "O";
         currentPlayer = "X";
         playerTurn.innerHTML = "It's " + player1.value +"'s turn";
-        oMoves.push(event.target)
+        oMoves.push(event.target); 
+        totalMoves.push(event.target); 
       }
       checkWin();
 

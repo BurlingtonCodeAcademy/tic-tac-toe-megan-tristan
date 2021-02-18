@@ -22,7 +22,8 @@ body {
   grid-column: 1/4; 
   grid-row: 2; 
   text-align: center; 
-  font-size: 3vw; 
+  font-size: 3vw;
+  border: 3px double black;
 }
 .cell {
   text-align: center;
