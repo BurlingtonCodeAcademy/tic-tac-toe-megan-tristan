@@ -5,6 +5,10 @@ body {
   font-family: Avenir;
 }
 
+h4 {
+  display: inline;
+}
+
 /*Game Board*/
 #board {
   display: grid;
@@ -12,19 +16,23 @@ body {
   grid-template-columns: repeat(3, 150px);
   justify-content: center;
 }
+
+/*Title of Game*/
 #title {
   grid-column: 1/4;
   grid-row: 1;
   text-align: center;
 }
-
+/*Appears below game title and declares the current players name*/
 #status {
-  grid-column: 1/4; 
-  grid-row: 2; 
-  text-align: center; 
+  grid-column: 1/4;
+  grid-row: 2;
+  text-align: center;
   font-size: 3vw;
   border: 3px double black;
 }
+
+/*Each game cell*/
 .cell {
   text-align: center;
   padding-top: 25px;
@@ -35,10 +43,7 @@ body {
   border-radius: 7%;
 }
 
-h4 {
-  display: inline;
-}
-
+/*start button*/
 #start {
   line-height: 2;
   padding: 2px 20px;
@@ -48,14 +53,17 @@ h4 {
   background-color: rgb(255, 201, 121);
   border-radius: 10px;
   background-image: linear-gradient(
-    to top left,
+    /*gradually changes the color scheme of the button by introducing a gradient to it*/
+      to top left,
     rgba(0, 0, 0, 0.2),
     rgba(0, 0, 0, 0.2) 30%,
     rgba(0, 0, 0, 0)
   );
+  /* provides depth to the buttons edge*/
   box-shadow: inset 2px 2px 3px rgba(26, 22, 22, 0.897) inset -2px -2px 3px
     rgba(0, 0, 0, 0.6);
 }
+/*lightens the buttons color to a grayish color when mouse hovers over it*/
 #start:hover {
   background-color: rgb(224, 214, 182);
 }
