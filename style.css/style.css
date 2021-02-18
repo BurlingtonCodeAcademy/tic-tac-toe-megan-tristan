@@ -1,1 +1,110 @@
 
+<<<<<<< HEAD
+=======
+h4 {
+  display: inline;
+}
+
+#title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #b07289;
+}
+
+/*Game Board*/
+#board {
+  display: grid;
+  grid-template-rows: repeat(3, 150px);
+  grid-template-columns: repeat(3, 150px);
+  justify-content: center;
+  padding: 4px;
+  grid-gap: 5px;
+}
+
+/*Title of Game*/
+#title {
+  grid-column: 2/4;
+  grid-row: 1;
+  text-align: center;
+}
+/*Appears below game title and declares the current players name*/
+#status {
+  grid-column: 2/4;
+  grid-row: 2;
+  text-align: center;
+  font-size: 3vw;
+  border: 3px double black;
+  display: inline; 
+}
+
+/*Each game cell*/
+.cell {
+  text-align: center;
+  padding-top: 25px;
+  font-size: 5em;
+  color: white;
+  background-color: #571032;
+  border: 1px solid #b07289;
+  border-radius: 7%;
+}
+
+<<<<<<< HEAD
+#start{
+text-align: center;
+height: 10px; 
+width: 100%; 
+background-color: #197278;
+color: white;
+font-size: 1vw;
+border: 0;
+padding: 3vw; 
+border-radius: 5%;
+font-weight: bold;
+text-transform: uppercase;
+box-shadow: 3px 3px 2px #d8d8d8;
+margin-top: 10px;
+justify-content: flex-end;
+}
+/*lightens the buttons color to a grayish color when mouse hovers over it*/
+
+=======
+#form-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  border: 1px solid red;
+  width: 20vw;
+}
+
+#start-wrapper {
+  border: 1px solid black;
+}
+
+#start {
+  text-align: center;
+
+  background-color: #197278;
+  color: white;
+  font-size: 1vw;
+  border: 0;
+
+  border-radius: 5%;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 3px 3px 2px #d8d8d8;
+}
+
+/*lightens the buttons color to a grayish color when mouse hovers over it*/
+>>>>>>> 5be1beb0ae27de4775267fc906b337c00c6b7fc4
+#start:hover {
+  background-color: rgb(224, 214, 182);
+}
+
+#start:disabled {
+  background-color: grey;
+}
+
+label {
+  font-weight: bold;
+}
+>>>>>>> 62ffc68b8c50d47c23f7f5e925c2f13f35b40d07
