@@ -7,6 +7,9 @@ let playerTurn = document.getElementById("player-turn");
 let player1 = document.getElementById("player1");
 //let player2 = "Player 2"
 let player2 = document.getElementById("player2");
+let playAgainButton = document.getElementById("play-another-game");
+let timer = document.getElementById("timer");
+let timeElapsed;
 
 let cell1 = document.getElementById("cell1");
 let cell2 = document.getElementById("cell2");
@@ -23,17 +26,9 @@ let xMoves = [];
 let oMoves = [];
 //total player moves array
 let totalMoves = [];
+
 //board object//
 let gameBoard = {
-  cell1: "X",
-  cell2: "",
-  cell3: "",
-  cell4: "",
-  cell5: "",
-  cell6: "",
-  cell7: "",
-  cell8: "",
-  cell9: "",
   playerMove(event) {
     //update/check the object
     if (!event.target.textContent) {
@@ -59,7 +54,13 @@ let gameBoard = {
 };
 
 //functions
-
+/*winningCombos = [[cell1, cell2, cell3], [cell4, cell5, cell6]]
+//xMoves & oMoves change to array of cell strings 
+for (let i=0; i<winningCombos.length; i++) {
+  if xMoves.includes(winningCombos[i]) {
+    xWin()
+  } else if yMoves 
+}*/
 function checkWin() {
   //check to see if the player has a winning combination
   if (
@@ -86,7 +87,13 @@ function checkWin() {
       xMoves.includes(cell9)) ||
     (xMoves.includes(cell3) && xMoves.includes(cell5) && xMoves.includes(cell7))
   ) {
-    alert("Congratulations, " + player1.value + ", you won!!!");
+    alert(
+      `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`
+    );
+    clearInterval(timeElapsed);
+    document.getElementById(
+      "play-again"
+    ).innerHTML = `<button id="play-another-game" type="submit">Play Again!</button>`;
   } else if (
     (oMoves.includes(cell1) &&
       oMoves.includes(cell2) &&
@@ -111,9 +118,18 @@ function checkWin() {
       oMoves.includes(cell9)) ||
     (oMoves.includes(cell3) && oMoves.includes(cell5) && oMoves.includes(cell7))
   ) {
-    alert("Congratulations, " + player2.value + ", you won!!!");
+    clearInterval(timeElapsed);
+    alert(
+      `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`
+    );
+    document.getElementById(
+      "play-again"
+    ).innerHTML = `<button id="play-another-game" type="submit">Play Again!</button>`;
   } else if (totalMoves.length === 9) {
     alert("No winner :(");
+    document.getElementById(
+      "play-again"
+    ).innerHTML = `<button id="play-another-game" type="submit">Play Again!</button>`;
   }
 }
 
@@ -122,9 +138,17 @@ function checkWin() {
 start.addEventListener("click", startFun);
 
 function startFun(event) {
-  for (let cell of allCells) {
-    cell.addEventListener("click", gameBoard.playerMove);
+  if (player1.value && player2.value) {
+    for (let cell of allCells) {
+      cell.addEventListener("click", gameBoard.playerMove);
+    }
     playerTurn.innerHTML = "It's " + player1.value + "'s turn!";
-  }
-  start.disabled = true;
+    start.disabled = true;
+    timeElapsed = setInterval(counter, 1000);
+  } else alert("Please enter a name for Player 1 and Player 2!");
 }
+
+let count = 0;
+let counter = () => {
+  timer.textContent = count++;
+};
