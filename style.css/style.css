@@ -16,7 +16,18 @@ h4 {
   background-color: #b07289;
 }
 
+#body-wrapper {
+  display: flex;
+
+  background-color: blue;
+}
+
 /*Game Board*/
+#board-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 #board {
   display: grid;
   grid-template-rows: repeat(3, 150px);
@@ -53,14 +64,18 @@ h4 {
 }
 
 #form-wrapper {
+  border: 1px solid black;
   display: flex;
   flex-flow: column nowrap;
-  border: 1px solid red;
-  width: 20vw;
+  justify-content: flex-start;
+
+  width: 17vw;
+  margin-left: 21vw;
 }
 
 #start-wrapper {
   border: 1px solid black;
+  width: 10vw;
 }
 
 #start {

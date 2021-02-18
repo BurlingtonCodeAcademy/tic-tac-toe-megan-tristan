@@ -4,7 +4,7 @@ let otherPlayer = "";
 let start = document.getElementById("start");
 let playerTurn = document.getElementById("player-turn");
 //let player1 = "Player 1"
-player1 = document.getElementById("player1");
+let player1 = document.getElementById("player1");
 //let player2 = "Player 2"
 let player2 = document.getElementById("player2");
 
@@ -43,20 +43,20 @@ let gameBoard = {
         currentPlayer = "O";
         playerTurn.innerHTML = "It's " + player2.value + "'s turn";
         xMoves.push(event.target);
-        totalMoves.push(event.target); 
+        totalMoves.push(event.target);
       } else if (currentPlayer === "O") {
         event.target.textContent = "O";
         currentPlayer = "X";
-        playerTurn.innerHTML = "It's " + player1.value +"'s turn";
-        oMoves.push(event.target); 
-        totalMoves.push(event.target); 
+        playerTurn.innerHTML = "It's " + player1.value + "'s turn";
+        oMoves.push(event.target);
+        totalMoves.push(event.target);
       }
       checkWin();
 
       console.log(event.target);
     } else alert("You can't play there!");
   },
-}
+};
 
 //functions
 
@@ -111,9 +111,9 @@ function checkWin() {
       oMoves.includes(cell9)) ||
     (oMoves.includes(cell3) && oMoves.includes(cell5) && oMoves.includes(cell7))
   ) {
-    alert("Congratulations, " + player2.value + ", you won!!!");;
+    alert("Congratulations, " + player2.value + ", you won!!!");
   } else if (totalMoves.length === 9) {
-    alert('No winner :(');
+    alert("No winner :(");
   }
 }
 
@@ -124,9 +124,7 @@ start.addEventListener("click", startFun);
 function startFun(event) {
   for (let cell of allCells) {
     cell.addEventListener("click", gameBoard.playerMove);
-    playerTurn.innerHTML = "It's " + player1.value + "'s turn!"; 
+    playerTurn.innerHTML = "It's " + player1.value + "'s turn!";
   }
   start.disabled = true;
-  console.log(player1.value);
-  console.log(player2.value)
 }
