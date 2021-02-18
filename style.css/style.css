@@ -50,6 +50,7 @@ h4 {
   text-align: center;
   font-size: 3vw;
   border: 3px double black;
+  display: inline;
 }
 
 /*Each game cell*/
@@ -63,36 +64,24 @@ h4 {
   border-radius: 7%;
 }
 
-#form-wrapper {
-  border: 1px solid black;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-
-  width: 17vw;
-  margin-left: 21vw;
-}
-
-#start-wrapper {
-  border: 1px solid black;
-  width: 10vw;
-}
-
 #start {
   text-align: center;
-
+  height: 10px;
+  width: 100%;
   background-color: #197278;
   color: white;
   font-size: 1vw;
   border: 0;
-
+  padding: 3vw;
   border-radius: 5%;
   font-weight: bold;
   text-transform: uppercase;
   box-shadow: 3px 3px 2px #d8d8d8;
+  margin-top: 10px;
+  justify-content: flex-end;
 }
-
 /*lightens the buttons color to a grayish color when mouse hovers over it*/
+
 #start:hover {
   background-color: rgb(224, 214, 182);
 }
