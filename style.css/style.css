@@ -2,7 +2,7 @@ body {
   background-color: #d1f3de;
   justify-content: center;
   align-items: center;
-  font-family: Avenir; 
+  font-family: Avenir;
 }
 
 /*Game Board*/
@@ -14,7 +14,7 @@ body {
 }
 #title {
   grid-column: 1/4;
-  grid-row:1;
+  grid-row: 1;
   text-align: center;
 }
 
@@ -35,7 +35,31 @@ body {
   border-radius: 7%;
 }
 
+h4 {
+  display: inline;
+}
 
-h4{
-  display: inline; 
+#start {
+  line-height: 2;
+  padding: 2px 20px;
+  font-size: 0.8rem;
+  text-align: center;
+  color: black;
+  background-color: rgb(255, 201, 121);
+  border-radius: 10px;
+  background-image: linear-gradient(
+    to top left,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 30%,
+    rgba(0, 0, 0, 0)
+  );
+  box-shadow: inset 2px 2px 3px rgba(26, 22, 22, 0.897) inset -2px -2px 3px
+    rgba(0, 0, 0, 0.6);
+}
+#start:hover {
+  background-color: rgb(224, 214, 182);
+}
+
+#start:disabled {
+  background-color: grey;
 }
