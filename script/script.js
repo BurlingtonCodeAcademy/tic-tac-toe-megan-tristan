@@ -3,10 +3,8 @@ let allCells = document.querySelectorAll(".cell");
 let otherPlayer = "";
 let start = document.getElementById("start");
 let playerTurn = document.getElementById("player-turn");
-//let player1 = "Player 1"
-player1 = document.getElementById("player1");
-//let player2 = "Player 2"
 let player2 = document.getElementById("player2");
+
 
 let cell1 = document.getElementById("cell1");
 let cell2 = document.getElementById("cell2");
@@ -124,9 +122,15 @@ start.addEventListener("click", startFun);
 function startFun(event) {
   for (let cell of allCells) {
     cell.addEventListener("click", gameBoard.playerMove);
-    playerTurn.innerHTML = "It's " + player1.value + "'s turn!"; 
-  }
+
   start.disabled = true;
-  console.log(player1.value);
-  console.log(player2.value)
+  if (!(document.getElementById("player1")) && !(document.getElementByI("player2"))) {
+    player1 = "Player 1"
+    player2 = "Player 2"
+  }
+
+  playerTurn.innerHTML = "It's " + player1.value + "'s turn!"; 
 }
+}
+
+start() 

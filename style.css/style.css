@@ -32,6 +32,7 @@ h4 {
   text-align: center; 
   font-size: 3vw;
   border: 3px double black;
+  display: inline; 
 }
 
 /*Each game cell*/
@@ -45,34 +46,6 @@ h4 {
   border-radius: 7%;
 }
 
-<<<<<<< HEAD
-/*start button*/
-#start {
-=======
-h4 {
-  display: inline;
-}
-
-/*#start {
->>>>>>> 5e8de7282b1664b0361950ff0170f52a32596a62
-  line-height: 2;
-  padding: 2px 20px;
-  font-size: 0.8rem;
-  text-align: center;
-  color: black;
-  background-color: rgb(255, 201, 121);
-  border-radius: 10px;
-  background-image: linear-gradient(
-    /*gradually changes the color scheme of the button by introducing a gradient to it*/
-      to top left,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.2) 30%,
-    rgba(0, 0, 0, 0)
-  );
-  /* provides depth to the buttons edge*/
-  box-shadow: inset 2px 2px 3px rgba(26, 22, 22, 0.897) inset -2px -2px 3px
-    rgba(0, 0, 0, 0.6);
-}*/
 #start{
 text-align: center;
 height: 10px; 
@@ -89,11 +62,8 @@ box-shadow: 3px 3px 2px #d8d8d8;
 margin-top: 10px;
 justify-content: flex-end;
 }
-<<<<<<< HEAD
 /*lightens the buttons color to a grayish color when mouse hovers over it*/
-=======
 
->>>>>>> 5e8de7282b1664b0361950ff0170f52a32596a62
 #start:hover {
   background-color: rgb(224, 214, 182);
 }
