@@ -11,8 +11,17 @@
   <body>
     <div id = "title-container">
     <h1 id ="title">Tic Tac Toe</h1>
-    <h4 id ="status">Player Turn:</h4><h4 id = "player-turn">X</h4>
+    <div id ="status"><h4>It's </h4><h4 id = "player-turn">X</h4><h4>'s turn</h4></div>
   </div>
+    <form class=myform>
+      <label>Player 1 Name: <input id="player1" type=“text” /></label>
+  </form>
+  <form class=myform>
+    <label>Player 2 Name: <input id="player2" type=“text” /></label>
+    <div class="status">
+      <button id="start" type="button">Start Game</button>
+    </div>
+</form>
 
     <div id="board">
       <div id="cell1" class="cell"></div>
@@ -26,9 +35,6 @@
       <div id="cell9" class="cell"></div>
     </div>
 
-    <div class="status">
-      <button id="start" type="button">Start Game</button>
-    </div>
     <script src="script/script.js"></script>
   </body>
 </html>

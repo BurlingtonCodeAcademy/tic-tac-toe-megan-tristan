@@ -8,11 +8,22 @@ body {
 /*Game Board*/
 #board {
   display: grid;
-  grid-template-rows: repeat(3, 150px);
+  grid-template-rows: repeat(5, 150px);
   grid-template-columns: repeat(3, 150px);
   justify-content: center;
 }
+#title {
+  grid-column: 1/4;
+  grid-row:1;
+  text-align: center;
+}
 
+#status {
+  grid-column: 1/4; 
+  grid-row: 2; 
+  text-align: center; 
+  font-size: 3vw; 
+}
 .cell {
   text-align: center;
   padding-top: 25px;
@@ -24,20 +35,6 @@ body {
 }
 
 
-#title-container {
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  align-self: center;
-}
-
-#id {
-  grid-row: 1; 
-}
-
-#status {
-  grid-row: 2; 
-}
-
-#player-turn{
-  grid-row: 3; 
+h4{
+  display: inline; 
 }
