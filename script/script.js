@@ -3,13 +3,14 @@ let allCells = document.querySelectorAll(".cell");
 let otherPlayer = "";
 let start = document.getElementById("start");
 let playerTurn = document.getElementById("player-turn");
-//let player1 = "Player 1"
+document.getElementById("player1").defaultValue = "Player 1";
+document.getElementById("player2").defaultValue = "Player 2";
 let player1 = document.getElementById("player1");
-//let player2 = "Player 2"
 let player2 = document.getElementById("player2");
 let playAgainButton = document.getElementById("play-another-game")
 let timer = document.getElementById("timer")
 let timeElapsed
+
 
 let cell1 = document.getElementById("cell1");
 let cell2 = document.getElementById("cell2");
@@ -39,20 +40,20 @@ let gameBoard = {
         currentPlayer = "O";
         playerTurn.innerHTML = "It's " + player2.value + "'s turn";
         xMoves.push(event.target);
-        totalMoves.push(event.target);
+        totalMoves.push(event.target); 
       } else if (currentPlayer === "O") {
         event.target.textContent = "O";
         currentPlayer = "X";
-        playerTurn.innerHTML = "It's " + player1.value + "'s turn";
-        oMoves.push(event.target);
-        totalMoves.push(event.target);
+        playerTurn.innerHTML = "It's " + player1.value +"'s turn";
+        oMoves.push(event.target); 
+        totalMoves.push(event.target); 
       }
       checkWin();
 
       console.log(event.target);
     } else alert("You can't play there!");
   },
-};
+}
 
 //functions
 /*winningCombos = [[cell1, cell2, cell3], [cell4, cell5, cell6]]
@@ -62,6 +63,7 @@ for (let i=0; i<winningCombos.length; i++) {
     xWin()
   } else if yMoves 
 }*/
+
 function checkWin() {
   //check to see if the player has a winning combination
   if (
@@ -120,6 +122,7 @@ function checkWin() {
     document.getElementById("play-again").innerHTML = `<button id="play-another-game" type="submit">Play Again!</button>`
   } else if (totalMoves.length === 9) {
     alert('No winner :(');
+    clearInterval(timeElapsed)
     document.getElementById("play-again").innerHTML = `<button id="play-another-game" type="submit">Play Again!</button>`
   }
 }
