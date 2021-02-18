@@ -128,5 +128,3 @@ function startFun(event) {
   }
   start.disabled = true;
 }
-
-start();
