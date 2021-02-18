@@ -109,7 +109,7 @@ function checkWin() {
     (oMoves.includes(cell1) &&
       oMoves.includes(cell5) &&
       oMoves.includes(cell9)) ||
-    (oMoves.includes(cell3) && xMoves.includes(cell5) && xMoves.includes(cell7))
+    (oMoves.includes(cell3) && oMoves.includes(cell5) && oMoves.includes(cell7))
   ) {
     alert("Congratulations, " + player2.value + ", you won!!!");;
   } else if (totalMoves.length === 9) {
