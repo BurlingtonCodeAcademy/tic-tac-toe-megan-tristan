@@ -35,6 +35,7 @@ let gameBoard = {
         playerTurn.innerHTML = "It's " + player2.value + "'s turn";
         xMoves.push(event.target);
         totalMoves.push(event.target);
+        cleanTarget(xMoves);
       } else if (currentPlayer === "O") {
         event.target.textContent = "O";
         currentPlayer = "X";
@@ -43,8 +44,6 @@ let gameBoard = {
         totalMoves.push(event.target);
       }
       checkWin();
-
-      console.log(event.target);
     } else alert("You can't play there!");
   },
 };
@@ -313,3 +312,20 @@ let count = 0;
 let counter = () => {
   timer.textContent = count++;
 };
+
+let newXArray = [];
+let cleanTarget = (obj) => {
+  let item = obj[0];
+  let html = item.outerHTML.toString();
+  newItem = html.slice(9, 14);
+  console.log(newItem);
+  newXArray.push(newItem);
+  xMoves.shift(obj);
+  console.log(newXArray);
+  newXArray = Array.from(newXArray)
+
+};
+
+newArray = ["cell1", "cell3", "cell5"]
+
+winnerCombos = [["cell1", "cell2", "cell"], ]
