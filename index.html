@@ -13,20 +13,28 @@
       <h1 id="title">Tic Tac Toe</h1>
       <div id="status">
         <h4 id="player-turn"></h4></br>
-        <h4>Time elapsed: </h4><div id ="timer"></div>
+        <h4>Seconds elapsed: </h4><div id ="timer">0</div>
       </div>
     </div>
 
-    <form id="form-wrapper">
-      <label>Player 1 Name: <input id="player1" type="text" value = "Player 1" placeholder="Player 1"></label>
-      <label>Player 2 Name: <input id="player2" type="text" value = "Player 2" placeholder = "Player 2"></label>
-    </form>
-    <div id="start-wrapper">
-      <button id="start" type="submit">Start Game</button>
-    </div>
-    <div id="play-again"></div>
-
     <div id="board">
+    <div id="play-game">
+    <form id="form-wrapper">
+      <label class ="player-name">Player 1 Name: <input id="player1" type="text" value = "Player 1" placeholder="Player 1"></label>
+    </br>
+      <label id="p2Comp" class ="player-name">Player 2 Name: <input id="player2" type="text" value = "Player 2" placeholder = "Player 2"></label>
+      <div id="start-wrapper">
+        <button id="start" type="submit">Start Game</button>
+      </div>
+    </form>
+    <div id="player-wrapper">
+      <button id="player-butt">Player v Player</button>
+    </div>
+    <div id="computer-wrapper">
+      <button id="computer-butt">Player v Computer</button>
+    </div>
+  </div>
+
       <div id="cell1" class="cell"></div>
       <div id="cell2" class="cell"></div>
       <div id="cell3" class="cell"></div>
