@@ -3,8 +3,6 @@ let allCells = document.querySelectorAll(".cell");
 let otherPlayer = "";
 let start = document.getElementById("start");
 let playerTurn = document.getElementById("player-turn");
-document.getElementById("player1").defaultValue = "Player 1";
-document.getElementById("player2").defaultValue = "Player 2";
 let player1 = document.getElementById("player1");
 let player2 = document.getElementById("player2");
 let playAgainButton = document.getElementById("play-another-game");
@@ -39,6 +37,7 @@ let gameBoard = {
         playerTurn.innerHTML = "It's " + player2.value + "'s turn";
         xMoves.push(event.target);
         totalMoves.push(event.target);
+        cleanTarget(xMoves);
       } else if (currentPlayer === "O") {
         event.target.textContent = "O";
         currentPlayer = "X";
@@ -47,8 +46,6 @@ let gameBoard = {
         totalMoves.push(event.target);
       }
       checkWin();
-
-      console.log(event.target);
     } else alert("You can't play there!");
   },
 };
@@ -153,4 +150,15 @@ function startFun(event) {
 let count = 0;
 let counter = () => {
   timer.textContent = count++;
+};
+
+let newXArray = [];
+let cleanTarget = (obj) => {
+  let item = obj[0];
+  let html = item.outerHTML.toString();
+  newItem = html.slice(9, 14);
+  console.log(newItem);
+  newXArray.push(newItem);
+  xMoves.shift(obj);
+  console.log(newXArray);
 };
