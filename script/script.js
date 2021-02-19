@@ -1,5 +1,6 @@
 let currentPlayer = "X";
 let allCells = document.querySelectorAll(".cell");
+
 let otherPlayer = "";
 let start = document.getElementById("start");
 let playerTurn = document.getElementById("player-turn");
@@ -161,4 +162,10 @@ let cleanTarget = (obj) => {
   newXArray.push(newItem);
   xMoves.shift(obj);
   console.log(newXArray);
+  newXArray = Array.from(newXArray)
+
 };
+
+newArray = ["cell1", "cell3", "cell5"]
+
+winnerCombos = [["cell1", "cell2", "cell"], ]
