@@ -1,12 +1,15 @@
+//variable definition
 let currentPlayer = "X";
-let allCells = document.querySelectorAll(".cell");
-let start = document.getElementById("start");
-let playerTurn = document.getElementById("player-turn");
 let player1 = document.getElementById("player1");
 let player2 = document.getElementById("player2");
+//buttons 
+let start = document.getElementById("start");
+//status elements to display
+let playerTurn = document.getElementById("player-turn");
 let timer = document.getElementById("timer");
 let timeElapsed;
-
+//define cells 
+let allCells = document.querySelectorAll(".cell");
 let cell1 = document.getElementById("cell1");
 let cell2 = document.getElementById("cell2");
 let cell3 = document.getElementById("cell3");
@@ -26,43 +29,49 @@ let totalMoves = [];
 //board object//
 let gameBoard = {
   playerMove(event) {
-    //update/check the object
+    //check to see if there is content in the cell already 
     if (!event.target.textContent) {
       //update the cell & switch players
       if (currentPlayer === "X") {
         event.target.textContent = "X";
+        //switch players 
         currentPlayer = "O";
         playerTurn.innerHTML = "It's " + player2.value + "'s turn";
-        xMoves.push(event.target);
+        //add this move to the player's array
+        let item = event.target;
+        let html = item.outerHTML.toString();
+        newItem = html.slice(9, 14);
+        xMoves.push(newItem);
+        console.log(xMoves); 
+        //add it to the total moves
         totalMoves.push(event.target);
-        cleanTarget(xMoves);
+        //function 
       } else if (currentPlayer === "O") {
         event.target.textContent = "O";
+        //switch players 
         currentPlayer = "X";
         playerTurn.innerHTML = "It's " + player1.value + "'s turn";
-        oMoves.push(event.target);
+        //add this move to the player's array
+        let item = event.target;
+        let html = item.outerHTML.toString();
+        newItem = html.slice(9, 14);
+        oMoves.push(newItem);
+        //add it to the total moves
         totalMoves.push(event.target);
+        //function 
       }
       checkWin();
+      //ask player to play somewhere else 
     } else alert("You can't play there!");
   },
 };
 
-//functions
-/*winningCombos = [[cell1, cell2, cell3], [cell4, cell5, cell6]]
-//xMoves & oMoves change to array of cell strings 
-for (let i=0; i<winningCombos.length; i++) {
-  if xMoves.includes(winningCombos[i]) {
-    xWin()
-  } else if yMoves 
-}*/
-
 function checkWin() {
-  //check to see if the player has a winning combination
+  //check to see if the player has a winning combination - if they do, then highlight the winning cells, set an alert, and stop the timer
   if (
-    xMoves.includes(cell1) &&
-    xMoves.includes(cell2) &&
-    xMoves.includes(cell3)
+    xMoves.includes("cell1") &&
+    xMoves.includes("cell2") &&
+    xMoves.includes("cell3")
   ) {
     cell1.style.backgroundColor = "red";
     cell2.style.backgroundColor = "red";
@@ -74,9 +83,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    xMoves.includes(cell4) &&
-    xMoves.includes(cell5) &&
-    xMoves.includes(cell6)
+    xMoves.includes("cell4") &&
+    xMoves.includes("cell5") &&
+    xMoves.includes("cell6")
   ) {
     cell4.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
@@ -88,9 +97,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    xMoves.includes(cell7) &&
-    xMoves.includes(cell8) &&
-    xMoves.includes(cell9)
+    xMoves.includes("cell7") &&
+    xMoves.includes("cell8") &&
+    xMoves.includes("cell9")
   ) {
     cell7.style.backgroundColor = "red";
     cell8.style.backgroundColor = "red";
@@ -102,9 +111,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    xMoves.includes(cell1) &&
-    xMoves.includes(cell4) &&
-    xMoves.includes(cell7)
+    xMoves.includes("cell1") &&
+    xMoves.includes("cell4") &&
+    xMoves.includes("cell7")
   ) {
     cell1.style.backgroundColor = "red";
     cell4.style.backgroundColor = "red";
@@ -116,9 +125,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    xMoves.includes(cell2) &&
-    xMoves.includes(cell5) &&
-    xMoves.includes(cell8)
+    xMoves.includes("cell2") &&
+    xMoves.includes("cell5") &&
+    xMoves.includes("cell8")
   ) {
     cell2.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
@@ -130,9 +139,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    xMoves.includes(cell3) &&
-    xMoves.includes(cell6) &&
-    xMoves.includes(cell9)
+    xMoves.includes("cell3") &&
+    xMoves.includes("cell6") &&
+    xMoves.includes("cell9")
   ) {
     cell3.style.backgroundColor = "red";
     cell6.style.backgroundColor = "red";
@@ -144,9 +153,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    xMoves.includes(cell1) &&
-    xMoves.includes(cell5) &&
-    xMoves.includes(cell9)
+    xMoves.includes("cell1") &&
+    xMoves.includes("cell5") &&
+    xMoves.includes("cell9")
   ) {
     cell1.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
@@ -158,9 +167,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    xMoves.includes(cell3) &&
-    xMoves.includes(cell5) &&
-    xMoves.includes(cell7)
+    xMoves.includes("cell3") &&
+    xMoves.includes("cell5") &&
+    xMoves.includes("cell7")
   ) {
     cell3.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
@@ -172,9 +181,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    oMoves.includes(cell1) &&
-    oMoves.includes(cell2) &&
-    oMoves.includes(cell3)
+    oMoves.includes("cell1") &&
+    oMoves.includes("cell2") &&
+    oMoves.includes("cell3")
   ) {
     cell1.style.backgroundColor = "red";
     cell2.style.backgroundColor = "red";
@@ -186,9 +195,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    oMoves.includes(cell4) &&
-    oMoves.includes(cell5) &&
-    oMoves.includes(cell6)
+    oMoves.includes("cell4") &&
+    oMoves.includes("cell5") &&
+    oMoves.includes("cell6")
   ) {
     cell4.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
@@ -200,9 +209,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    oMoves.includes(cell7) &&
-    oMoves.includes(cell8) &&
-    oMoves.includes(cell9)
+    oMoves.includes("cell7") &&
+    oMoves.includes("cell8") &&
+    oMoves.includes("cell9")
   ) {
     cell7.style.backgroundColor = "red";
     cell8.style.backgroundColor = "red";
@@ -214,9 +223,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    oMoves.includes(cell1) &&
-    oMoves.includes(cell4) &&
-    oMoves.includes(cell7)
+    oMoves.includes("cell1") &&
+    oMoves.includes("cell4") &&
+    oMoves.includes("cell7")
   ) {
     cell1.style.backgroundColor = "red";
     cell4.style.backgroundColor = "red";
@@ -228,9 +237,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    oMoves.includes(cell2) &&
-    oMoves.includes(cell5) &&
-    oMoves.includes(cell8)
+    oMoves.includes("cell2") &&
+    oMoves.includes("cell5") &&
+    oMoves.includes("cell8")
   ) {
     cell2.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
@@ -242,9 +251,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    oMoves.includes(cell3) &&
-    oMoves.includes(cell6) &&
-    oMoves.includes(cell9)
+    oMoves.includes("cell3") &&
+    oMoves.includes("cell6") &&
+    oMoves.includes("cell9")
   ) {
     cell3.style.backgroundColor = "red";
     cell6.style.backgroundColor = "red";
@@ -256,9 +265,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    oMoves.includes(cell1) &&
-    oMoves.includes(cell5) &&
-    oMoves.includes(cell9)
+    oMoves.includes("cell1") &&
+    oMoves.includes("cell5") &&
+    oMoves.includes("cell9")
   ) {
     cell1.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
@@ -270,9 +279,9 @@ function checkWin() {
     }, 1000);
     clearInterval(timeElapsed);
   } else if (
-    oMoves.includes(cell3) &&
-    oMoves.includes(cell5) &&
-    oMoves.includes(cell7)
+    oMoves.includes("cell3") &&
+    oMoves.includes("cell5") &&
+    oMoves.includes("cell7")
   ) {
     cell3.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
@@ -286,46 +295,32 @@ function checkWin() {
   } else if (totalMoves.length === 9) {
     alert("No winner :(");
     clearInterval(timeElapsed);
-    document.getElementById(
-      "play-again"
-    ).innerHTML = `<button id="play-another-game" type="submit">Play Again!</button>`;
   }
 }
-
-//event handlers
-
-start.addEventListener("click", startFun);
-
+//start the game 
 function startFun(event) {
   if (player1.value && player2.value) {
+    //turn each cell into a clickable cell
     for (let cell of allCells) {
       cell.addEventListener("click", gameBoard.playerMove);
     }
+    //display whose turn it is
     playerTurn.style.border = "3px double black"
     playerTurn.innerHTML = "It's " + player1.value + "'s turn!";
+    //disable the start button 
     start.disabled = true;
+    //start the timer 
     timeElapsed = setInterval(counter, 1000);
   } else alert("Please enter a name for Player 1 and Player 2!");
 }
-
-let count = 0;
+let count = 0; 
 let counter = () => {
+  timer.textContent = count++;	  
   timer.textContent = count++;
 };
 
-let newXArray = [];
-let cleanTarget = (obj) => {
-  let item = obj[0];
-  let html = item.outerHTML.toString();
-  newItem = html.slice(9, 14);
-  console.log(newItem);
-  newXArray.push(newItem);
-  xMoves.shift(obj);
-  console.log(newXArray);
-  newXArray = Array.from(newXArray)
+//event handlers
 
-};
+//make the start button start the game 
+start.addEventListener("click", startFun);
 
-newArray = ["cell1", "cell3", "cell5"]
-
-winnerCombos = [["cell1", "cell2", "cell"], ]
