@@ -73,6 +73,52 @@ let gameBoard = {
       //ask player to play somewhere else
     } else alert("You can't play there!");
   },
+  computerMove(event) {
+      //update the cell & switch players
+      if (currentPlayer === "X") {
+        if (!event.target.textContent) {
+        event.target.textContent = "X";
+        //switch players
+        currentPlayer = "O";
+        playerTurn.innerHTML = "It's the " + player2.value + "'s turn";
+        //add this move to the player's array
+        let item = event.target;
+        let html = item.outerHTML.toString();
+        newItem = html.slice(9, 14);
+        xMoves.push(newItem);
+        //add it to the total moves
+        totalMoves.push(event.target);
+        checkWin();
+        gameBoard.computerMove(event);
+      }
+     } else if (currentPlayer === "O") {
+       console.log(allCells)
+        let cellNum = Math.floor(Math.random()*9);
+        let compChoice = allCells[cellNum];
+        console.log(compChoice)
+        if (!compChoice.textContent) {
+        compChoice.textContent= "O";
+        //switch players
+        currentPlayer = "X";
+        playerTurn.innerHTML = "It's " + player1.value + "'s turn";
+        //add this move to the player's array
+        let item = compChoice;
+        let html = item.outerHTML.toString();
+        newItem = html.slice(9, 14);
+        oMoves.push(newItem);
+        //add it to the total moves
+        totalMoves.push(event.target);
+        checkWin();
+        //function*/
+        }
+        else if (compChoice.textContent) {
+          console.log(this)
+          gameBoard.computerMove(event);
+        }
+      }
+      //ask player to play somewhere else
+     else alert("You can't play there!");
+  },
 };
 
 function checkWin() {
@@ -326,8 +372,9 @@ function revealForm() {
 }
 //player v computer
 function revealForm2() {
+  computerButt.style.display = "none";
   player2.style.display = "none";
-  player2.value = "computer";
+  player2.value = "Computer";
   p2Comp.textContent = "Player 2: Computer";
   collapseForm.style.display = "block";
   playerWrapper.style.display = "none"; //collapses player v player button
@@ -336,7 +383,18 @@ function revealForm2() {
 //Start Game
 function startFun(event) {
   event.preventDefault();
-  if (player1.value && player2.value) {
+  if (player1.value && player2.value === "Computer") {
+    for (let cell of allCells) {
+      cell.addEventListener("click", gameBoard.computerMove);
+    }
+    //display whose turn it is
+    playerTurn.style.border = "3px double black";
+    playerTurn.innerHTML = "It's " + player1.value + "'s turn!";
+    //disable the start button
+    start.disabled = true;
+    //start the timer
+    timeElapsed = setInterval(counter, 1000);
+  } else if (player1.value && player2.value) {
     //turn each cell into a clickable cell
     for (let cell of allCells) {
       cell.addEventListener("click", gameBoard.playerMove);
@@ -348,8 +406,11 @@ function startFun(event) {
     start.disabled = true;
     //start the timer
     timeElapsed = setInterval(counter, 1000);
+  } else if (!player1.value && player2.value === "Computer") {
+    alert("Please enter a name for Player 1!");
   } else alert("Please enter a name for Player 1 and Player 2!");
 }
+
 let count = 0;
 let counter = () => {
   timer.textContent = count++;
