@@ -1,4 +1,4 @@
-//variable definition
+//---------------------variable definition-----------------------------//
 let currentPlayer = "X";
 let player1 = document.getElementById("player1");
 let player2 = document.getElementById("player2");
@@ -9,6 +9,7 @@ let playerWrapper = document.getElementById("player-wrapper");
 let playerButt = document.getElementById("player-butt");
 let computerButt = document.getElementById("computer-butt");
 let reset = document.getElementById("reset");
+
 //form display
 let collapseForm = document.getElementById("form-wrapper");
 let p2Comp = document.getElementById("p2Comp");
@@ -17,6 +18,12 @@ let p2Comp = document.getElementById("p2Comp");
 let playerTurn = document.getElementById("player-turn");
 let timer = document.getElementById("timer");
 let timeElapsed;
+
+//timer elements
+let hundredthSec = document.getElementById("hundredth-sec");
+let seconds = document.getElementById("seconds");
+let minutes = document.getElementById("minutes");
+
 //define cells
 let allCells = document.querySelectorAll(".cell");
 let cell1 = document.getElementById("cell1");
@@ -28,295 +35,207 @@ let cell6 = document.getElementById("cell6");
 let cell7 = document.getElementById("cell7");
 let cell8 = document.getElementById("cell8");
 let cell9 = document.getElementById("cell9");
-let currentCell;
-//player moves array
+
+//cell key to translate from string to variable
+let cellKey = {
+  cell1: cell1,
+  cell2: cell2,
+  cell3: cell3,
+  cell4: cell4,
+  cell5: cell5,
+  cell6: cell6,
+  cell7: cell7,
+  cell8: cell8,
+  cell9: cell9,
+};
+//array for each player to record their moves
 let xMoves = [];
 let oMoves = [];
+
 //total player moves array
 let totalMoves = [];
 
-//board object//
+//---------------------board object-----------------------------//
 let gameBoard = {
+  //player vs. player game
   playerMove(event) {
     //check to see if there is content in the cell already
     if (!event.target.textContent) {
-      //update the cell & switch players
       if (currentPlayer === "X") {
+        //update the cell
         event.target.textContent = "X";
         //switch players
         currentPlayer = "O";
+        //display whose turn it is
         playerTurn.innerHTML = "It's " + player2.value + "'s turn";
-        //add this move to the player's array
+        //clean up & add this move to the player's array
         let item = event.target;
-        let html = item.outerHTML.toString();
-        newItem = html.slice(9, 14);
-        xMoves.push(newItem);
-        console.log(xMoves);
+        item = item.outerHTML.toString();
+        item = item.slice(9, 14);
+        xMoves.push(item);
         //add it to the total moves
         totalMoves.push(event.target);
         //function
       } else if (currentPlayer === "O") {
+        //update the cell
         event.target.textContent = "O";
         //switch players
         currentPlayer = "X";
         playerTurn.innerHTML = "It's " + player1.value + "'s turn";
         //add this move to the player's array
-        let item = event.target;
-        let html = item.outerHTML.toString();
-        newItem = html.slice(9, 14);
-        oMoves.push(newItem);
+        let item = item.target;
+        item = item.outerHTML.toString();
+        item = item.slice(9, 14);
+        oMoves.push(item);
         //add it to the total moves
         totalMoves.push(event.target);
         //function
       }
       checkWin();
-      //ask player to play somewhere else
+      //ask player to play somewhere else if there is already something in the cell
     } else alert("You can't play there!");
   },
+
+  //player vs. computer game
   computerMove(event) {
-    //update the cell & switch players
+    //human goes first/is Player X
     if (currentPlayer === "X") {
+      //only allow to put X in cell if it's empty
       if (!event.target.textContent) {
+        //update cell
         event.target.textContent = "X";
         //switch players
         currentPlayer = "O";
         playerTurn.innerHTML = "It's the " + player2.value + "'s turn";
-        //add this move to the player's array
+        //clean up & add this move to the player's array
         let item = event.target;
-        console.log("item = " + { item });
-        let html = item.outerHTML.toString();
-        newItem = html.slice(9, 14);
-        console.log("new item = " + newItem);
-        xMoves.push(newItem);
+        item = item.outerHTML.toString();
+        item = item.slice(9, 14);
+        xMoves.push(item);
         //add it to the total moves
         totalMoves.push(event.target);
+        //check to see if there is a winning combo
         checkWin();
+        //trigger computer move
         gameBoard.computerMove(event);
       }
+      //ask player to play somewhere else if the cell is not empty
+      else alert("You can't play there!");
     } else if (currentPlayer === "O") {
-      console.log(allCells);
+      //choose a random number between 0 and 8
       let cellNum = Math.floor(Math.random() * 9);
+      //turn this into an index to randomly select a cell for computer to play in
       let compChoice = allCells[cellNum];
-      console.log(compChoice);
+      //only fill in the cell if it is "false" because it's empty
       if (!compChoice.textContent) {
         compChoice.textContent = "O";
         //switch players
         currentPlayer = "X";
         playerTurn.innerHTML = "It's " + player1.value + "'s turn";
-        //add this move to the player's array
+        //clean up & add this move to the player's array
         let item = compChoice;
-        let html = item.outerHTML.toString();
-        newItem = html.slice(9, 14);
-        oMoves.push(newItem);
+        item = item.outerHTML.toString();
+        item = item.slice(9, 14);
+        oMoves.push(item);
         //add it to the total moves
         totalMoves.push(event.target);
+        //check to see if there is a winning combo
         checkWin();
-        //function*/
+        //if there is already something in the cell, trigger the computer choice function again
       } else if (compChoice.textContent) {
-        console.log(this);
         gameBoard.computerMove(event);
       }
     }
-    //ask player to play somewhere else
-    else alert("You can't play there!");
   },
 };
 
+//all the winning combos
+let winningArrays = [
+  ["cell1", "cell2", "cell3"],
+  ["cell4", "cell5", "cell6"],
+  ["cell7", "cell8", "cell9"],
+  ["cell1", "cell4", "cell7"],
+  ["cell2", "cell5", "cell8"],
+  ["cell3", "cell6", "cell9"],
+  ["cell1", "cell5", "cell9"],
+  ["cell3", "cell5", "cell7"],
+];
+
 function checkWin() {
   //check to see if the player has a winning combination - if they do, then highlight the winning cells, set an alert, and stop the timer
-  if (
-    xMoves.includes("cell1") &&
-    xMoves.includes("cell2") &&
-    xMoves.includes("cell3")
-  ) {
-    cell1.style.backgroundColor = "red";
-    cell2.style.backgroundColor = "red";
-    cell3.style.backgroundColor = "red";
-
-    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
-
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    xMoves.includes("cell4") &&
-    xMoves.includes("cell5") &&
-    xMoves.includes("cell6")
-  ) {
-    cell4.style.backgroundColor = "red";
-    cell5.style.backgroundColor = "red";
-    cell6.style.backgroundColor = "red";
-
-    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    xMoves.includes("cell7") &&
-    xMoves.includes("cell8") &&
-    xMoves.includes("cell9")
-  ) {
-    cell7.style.backgroundColor = "red";
-    cell8.style.backgroundColor = "red";
-    cell9.style.backgroundColor = "red";
-    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    xMoves.includes("cell1") &&
-    xMoves.includes("cell4") &&
-    xMoves.includes("cell7")
-  ) {
-    cell1.style.backgroundColor = "red";
-    cell4.style.backgroundColor = "red";
-    cell7.style.backgroundColor = "red";
-    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    xMoves.includes("cell2") &&
-    xMoves.includes("cell5") &&
-    xMoves.includes("cell8")
-  ) {
-    cell2.style.backgroundColor = "red";
-    cell5.style.backgroundColor = "red";
-    cell8.style.backgroundColor = "red";
-    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    xMoves.includes("cell3") &&
-    xMoves.includes("cell6") &&
-    xMoves.includes("cell9")
-  ) {
-    cell3.style.backgroundColor = "red";
-    cell6.style.backgroundColor = "red";
-    cell9.style.backgroundColor = "red";
-    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    xMoves.includes("cell1") &&
-    xMoves.includes("cell5") &&
-    xMoves.includes("cell9")
-  ) {
-    cell1.style.backgroundColor = "red";
-    cell5.style.backgroundColor = "red";
-    cell9.style.backgroundColor = "red";
-    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    xMoves.includes("cell3") &&
-    xMoves.includes("cell5") &&
-    xMoves.includes("cell7")
-  ) {
-    cell3.style.backgroundColor = "red";
-    cell5.style.backgroundColor = "red";
-    cell7.style.backgroundColor = "red";
-    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    oMoves.includes("cell1") &&
-    oMoves.includes("cell2") &&
-    oMoves.includes("cell3")
-  ) {
-    cell1.style.backgroundColor = "red";
-    cell2.style.backgroundColor = "red";
-    cell3.style.backgroundColor = "red";
-    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    oMoves.includes("cell4") &&
-    oMoves.includes("cell5") &&
-    oMoves.includes("cell6")
-  ) {
-    cell4.style.backgroundColor = "red";
-    cell5.style.backgroundColor = "red";
-    cell6.style.backgroundColor = "red";
-    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    oMoves.includes("cell7") &&
-    oMoves.includes("cell8") &&
-    oMoves.includes("cell9")
-  ) {
-    cell7.style.backgroundColor = "red";
-    cell8.style.backgroundColor = "red";
-    cell9.style.backgroundColor = "red";
-    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    oMoves.includes("cell1") &&
-    oMoves.includes("cell4") &&
-    oMoves.includes("cell7")
-  ) {
-    cell1.style.backgroundColor = "red";
-    cell4.style.backgroundColor = "red";
-    cell7.style.backgroundColor = "red";
-    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    oMoves.includes("cell2") &&
-    oMoves.includes("cell5") &&
-    oMoves.includes("cell8")
-  ) {
-    cell2.style.backgroundColor = "red";
-    cell5.style.backgroundColor = "red";
-    cell8.style.backgroundColor = "red";
-    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    oMoves.includes("cell3") &&
-    oMoves.includes("cell6") &&
-    oMoves.includes("cell9")
-  ) {
-    cell3.style.backgroundColor = "red";
-    cell6.style.backgroundColor = "red";
-    cell9.style.backgroundColor = "red";
-    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    oMoves.includes("cell1") &&
-    oMoves.includes("cell5") &&
-    oMoves.includes("cell9")
-  ) {
-    cell1.style.backgroundColor = "red";
-    cell5.style.backgroundColor = "red";
-    cell9.style.backgroundColor = "red";
-    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (
-    oMoves.includes("cell3") &&
-    oMoves.includes("cell5") &&
-    oMoves.includes("cell7")
-  ) {
-    cell3.style.backgroundColor = "red";
-    cell5.style.backgroundColor = "red";
-    cell7.style.backgroundColor = "red";
-    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
-    clearInterval(timeElapsed);
-    reset.style.display = "block";
-  } else if (totalMoves.length === 9) {
-    window.alert("No winner :(");
+  //loop through the arrays
+  for (let i = 0; i < winningArrays.length; i++) {
+    //check to see if array of player X's moves has a winning array by looping through each sub-array
+    if (
+      xMoves.includes(winningArrays[i][0].toString()) &&
+      xMoves.includes(winningArrays[i][1].toString()) &&
+      xMoves.includes(winningArrays[i][2].toString())
+    ) {
+      //identify which were the winning cells
+      let winningCell1 = winningArrays[i][0];
+      let winningCell2 = winningArrays[i][1];
+      let winningCell3 = winningArrays[i][2];
+      //change color of winning cells
+      cellKey[winningCell1].style.backgroundColor = "red";
+      cellKey[winningCell2].style.backgroundColor = "red";
+      cellKey[winningCell3].style.backgroundColor = "red";
+      //message if player won in less than a minute
+      if (minutes.innerHTML == 00) {
+        playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${seconds.innerHTML} seconds!`;
+        //message if player won in over a minute
+      } else if (minutes.innerHTML !== 0) {
+        playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${minutes.innerHTML} minutes and ${seconds.innerHTML} seconds!`;
+      }
+      //stop the timer and show reset button
+      clearInterval(timeElapsed);
+      reset.style.display = "block";
+    }
+    //check to see if array of player O's moves has a winning array by looping through
+    else if (
+      //check to see if array of player O's moves has a winning array by looping through each sub-array
+      oMoves.includes(winningArrays[i][0].toString()) &&
+      oMoves.includes(winningArrays[i][1].toString()) &&
+      oMoves.includes(winningArrays[i][2].toString())
+    ) {
+      //identify winning cells
+      let winningCell1 = winningArrays[i][0];
+      let winningCell2 = winningArrays[i][1];
+      let winningCell3 = winningArrays[i][2];
+      //change color of winning cells
+      cellKey[winningCell1].style.backgroundColor = "red";
+      cellKey[winningCell2].style.backgroundColor = "red";
+      cellKey[winningCell3].style.backgroundColor = "red";
+      //adjust message if player won in less than a minute, give winning message, stop timer
+      if (minutes.innerHTML == 00) {
+        playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${seconds.innerHTML} seconds!`;
+      }
+      //adjust message if player won in more than a minute, give winning message, stop timer
+      else if (minutes.innerHTML !== 0) {
+        playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${minutes.innerHTML} minutes and ${seconds.innerHTML} seconds!`;
+      }
+      //stop the timer and show reset button
+      clearInterval(timeElapsed);
+      reset.style.display = "block";
+    }
+  }
+  //if no winning combos in either array & 9 cells are filled, it's a tie:
+  if (totalMoves.length === 9) {
+    playerTurn.textContent = "No winner :(";
     clearInterval(timeElapsed);
     reset.style.display = "block";
   }
 }
 
-//-----------EVENTS-----------//
+//------------------EVENTS-------------------------------//
 
 //Event Listeners://
 //make the start button start the game
 start.addEventListener("click", startFun);
+//player vs. player game - make reveal two player form
 playerButt.addEventListener("click", revealForm);
+//player vs. comp game - make reveal computer form
 computerButt.addEventListener("click", revealForm2);
+//reset button
 reset.addEventListener("click", resetGame);
 
 //Event Handlers://
@@ -344,39 +263,57 @@ function revealForm2() {
   playerWrapper.style.display = "none"; //collapses player v player button
 }
 
+let counter = () => {
+  //increase hundredths of seconds while less than 100
+  if (hundredthSec.innerHTML < 100) {
+    hundredthSec.innerHTML++;
+    //if hit 60 seconds, increase to minute, if hit 100 hundredths of a second, increase to one second
+  } else if (seconds.innerHTML == 59 && hundredthSec.innerHTML == 100) {
+    seconds.innerHTML++;
+    minutes.innerHTML++;
+    seconds.innerHTML = 0;
+    hundredthSec.innerHTML = 0;
+    //this statement is useful before seconds hit 59
+  } else if (hundredthSec.innerHTML == 100) {
+    seconds.innerHTML++;
+    hundredthSec.innerHTML = 0;
+  }
+};
+
 //Start Game
 function startFun(event) {
   event.preventDefault();
-  console.log(allCells);
+  //computer vs player game - begin game if player entered their name 
   if (player1.value && player2.value === "Computer") {
     for (let cell of allCells) {
+      //make each cell clickable
       cell.addEventListener("click", gameBoard.computerMove);
     }
     //display whose turn it is
-    playerTurn.style.border = "3px double black";
+    playerTurn.style.border = "5px double #fb8500";
+    playerTurn.style.borderRadius = "5%"
     playerTurn.innerHTML = "It's " + player1.value + "'s turn!";
     //disable the start button
     start.disabled = true;
-    //start the timer
-    timeElapsed = setInterval(counter, 1000);
+    //start the timer, make go off every 10/1000 = 1/100 second
+    timeElapsed = setInterval(counter, 10);
+    //player vs. player game - begin when they've entered names for both players 
   } else if (player1.value && player2.value) {
     //turn each cell into a clickable cell
     for (let cell of allCells) {
       cell.addEventListener("click", gameBoard.playerMove);
     }
     //display whose turn it is
-    playerTurn.style.border = "3px double black";
+    playerTurn.style.border = "5px double #fb8500";
+    playerTurn.style.borderRadius = "5%";
     playerTurn.innerHTML = "It's " + player1.value + "'s turn!";
     //disable the start button
     start.disabled = true;
-    //start the timer
-    timeElapsed = setInterval(counter, 1000);
+    //start the timer, make go off every 10/1000 = 1/100 second
+    timeElapsed = setInterval(counter, 10);
+    //if player doesn't enter name for player vs. player game, alert them to 
   } else if (!player1.value && player2.value === "Computer") {
     alert("Please enter a name for Player 1!");
+    //enter a name for player 1 and player 2 if have not 
   } else alert("Please enter a name for Player 1 and Player 2!");
 }
-
-let count = 0;
-let counter = () => {
-  timer.textContent = count++;
-};
