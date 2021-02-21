@@ -8,7 +8,7 @@ let start = document.getElementById("start");
 let playerWrapper = document.getElementById("player-wrapper");
 let playerButt = document.getElementById("player-butt");
 let computerButt = document.getElementById("computer-butt");
-
+let reset = document.getElementById("reset");
 //form display
 let collapseForm = document.getElementById("form-wrapper");
 let p2Comp = document.getElementById("p2Comp");
@@ -74,30 +74,32 @@ let gameBoard = {
     } else alert("You can't play there!");
   },
   computerMove(event) {
-      //update the cell & switch players
-      if (currentPlayer === "X") {
-        if (!event.target.textContent) {
+    //update the cell & switch players
+    if (currentPlayer === "X") {
+      if (!event.target.textContent) {
         event.target.textContent = "X";
         //switch players
         currentPlayer = "O";
         playerTurn.innerHTML = "It's the " + player2.value + "'s turn";
         //add this move to the player's array
         let item = event.target;
+        console.log("item = " + { item });
         let html = item.outerHTML.toString();
         newItem = html.slice(9, 14);
+        console.log("new item = " + newItem);
         xMoves.push(newItem);
         //add it to the total moves
         totalMoves.push(event.target);
         checkWin();
         gameBoard.computerMove(event);
       }
-     } else if (currentPlayer === "O") {
-       console.log(allCells)
-        let cellNum = Math.floor(Math.random()*9);
-        let compChoice = allCells[cellNum];
-        console.log(compChoice)
-        if (!compChoice.textContent) {
-        compChoice.textContent= "O";
+    } else if (currentPlayer === "O") {
+      console.log(allCells);
+      let cellNum = Math.floor(Math.random() * 9);
+      let compChoice = allCells[cellNum];
+      console.log(compChoice);
+      if (!compChoice.textContent) {
+        compChoice.textContent = "O";
         //switch players
         currentPlayer = "X";
         playerTurn.innerHTML = "It's " + player1.value + "'s turn";
@@ -110,14 +112,13 @@ let gameBoard = {
         totalMoves.push(event.target);
         checkWin();
         //function*/
-        }
-        else if (compChoice.textContent) {
-          console.log(this)
-          gameBoard.computerMove(event);
-        }
+      } else if (compChoice.textContent) {
+        console.log(this);
+        gameBoard.computerMove(event);
       }
-      //ask player to play somewhere else
-     else alert("You can't play there!");
+    }
+    //ask player to play somewhere else
+    else alert("You can't play there!");
   },
 };
 
@@ -131,12 +132,11 @@ function checkWin() {
     cell1.style.backgroundColor = "red";
     cell2.style.backgroundColor = "red";
     cell3.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+
+    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
+
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     xMoves.includes("cell4") &&
     xMoves.includes("cell5") &&
@@ -145,12 +145,10 @@ function checkWin() {
     cell4.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
     cell6.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+
+    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     xMoves.includes("cell7") &&
     xMoves.includes("cell8") &&
@@ -159,12 +157,9 @@ function checkWin() {
     cell7.style.backgroundColor = "red";
     cell8.style.backgroundColor = "red";
     cell9.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     xMoves.includes("cell1") &&
     xMoves.includes("cell4") &&
@@ -173,12 +168,9 @@ function checkWin() {
     cell1.style.backgroundColor = "red";
     cell4.style.backgroundColor = "red";
     cell7.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     xMoves.includes("cell2") &&
     xMoves.includes("cell5") &&
@@ -187,12 +179,9 @@ function checkWin() {
     cell2.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
     cell8.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     xMoves.includes("cell3") &&
     xMoves.includes("cell6") &&
@@ -201,12 +190,9 @@ function checkWin() {
     cell3.style.backgroundColor = "red";
     cell6.style.backgroundColor = "red";
     cell9.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     xMoves.includes("cell1") &&
     xMoves.includes("cell5") &&
@@ -215,12 +201,9 @@ function checkWin() {
     cell1.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
     cell9.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     xMoves.includes("cell3") &&
     xMoves.includes("cell5") &&
@@ -229,12 +212,9 @@ function checkWin() {
     cell3.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
     cell7.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+    playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     oMoves.includes("cell1") &&
     oMoves.includes("cell2") &&
@@ -243,12 +223,9 @@ function checkWin() {
     cell1.style.backgroundColor = "red";
     cell2.style.backgroundColor = "red";
     cell3.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     oMoves.includes("cell4") &&
     oMoves.includes("cell5") &&
@@ -257,12 +234,9 @@ function checkWin() {
     cell4.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
     cell6.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     oMoves.includes("cell7") &&
     oMoves.includes("cell8") &&
@@ -271,12 +245,9 @@ function checkWin() {
     cell7.style.backgroundColor = "red";
     cell8.style.backgroundColor = "red";
     cell9.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     oMoves.includes("cell1") &&
     oMoves.includes("cell4") &&
@@ -285,12 +256,9 @@ function checkWin() {
     cell1.style.backgroundColor = "red";
     cell4.style.backgroundColor = "red";
     cell7.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     oMoves.includes("cell2") &&
     oMoves.includes("cell5") &&
@@ -299,12 +267,9 @@ function checkWin() {
     cell2.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
     cell8.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     oMoves.includes("cell3") &&
     oMoves.includes("cell6") &&
@@ -313,12 +278,9 @@ function checkWin() {
     cell3.style.backgroundColor = "red";
     cell6.style.backgroundColor = "red";
     cell9.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     oMoves.includes("cell1") &&
     oMoves.includes("cell5") &&
@@ -327,12 +289,9 @@ function checkWin() {
     cell1.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
     cell9.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (
     oMoves.includes("cell3") &&
     oMoves.includes("cell5") &&
@@ -341,15 +300,13 @@ function checkWin() {
     cell3.style.backgroundColor = "red";
     cell5.style.backgroundColor = "red";
     cell7.style.backgroundColor = "red";
-    setTimeout(function () {
-      alert(
-        `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`
-      );
-    }, 1000);
+    playerTurn.textContent = `Congratulations, ${player2.value}, you won!!! It took you ${count} seconds!`;
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   } else if (totalMoves.length === 9) {
-    alert("No winner :(");
+    window.alert("No winner :(");
     clearInterval(timeElapsed);
+    reset.style.display = "block";
   }
 }
 
@@ -360,8 +317,15 @@ function checkWin() {
 start.addEventListener("click", startFun);
 playerButt.addEventListener("click", revealForm);
 computerButt.addEventListener("click", revealForm2);
+reset.addEventListener("click", resetGame);
 
 //Event Handlers://
+
+//reset game button
+function resetGame() {
+  location.reload();
+}
+
 //player v player
 function revealForm() {
   //adds style to the player v player button so that the form appears allowing player to input name
@@ -383,6 +347,7 @@ function revealForm2() {
 //Start Game
 function startFun(event) {
   event.preventDefault();
+  console.log(allCells);
   if (player1.value && player2.value === "Computer") {
     for (let cell of allCells) {
       cell.addEventListener("click", gameBoard.computerMove);
@@ -413,6 +378,5 @@ function startFun(event) {
 
 let count = 0;
 let counter = () => {
-  timer.textContent = count++;
   timer.textContent = count++;
 };

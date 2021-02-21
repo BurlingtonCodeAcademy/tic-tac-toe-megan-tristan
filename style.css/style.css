@@ -114,6 +114,12 @@
   justify-content: space-around;
   margin: 5px;
 }
+#reset-wrapper {
+  margin: 5px;
+}
+#reset {
+  display: none;
+}
 
 button {
   text-align: center;
@@ -126,11 +132,10 @@ button {
   box-shadow: 3px 3px 2px #d8d8d8;
   height: 4vh;
   width: 8vw;
-  align
 }
 
 /*lightens the buttons color to a grayish color when mouse hovers over it*/
-#start:hover {
+button:hover {
   background-color: rgb(224, 214, 182);
 }
 
