@@ -6,22 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Tic Tac Toe</title>
-  <link rel="stylesheet" href="/style.css/style.css" />
+  <link rel="stylesheet" href="./style/style.css" />
 </head>
 
 <body>
+  <!-- Status Info in the Header -->
   <div id="title-container">
     <h1 id="title">TIC TAC TOE</h1>
     <div id="status">
       <h4 id="player-turn"></h4></br>
-      <span id="timer"><h4>Time Elapsed: <span id="minutes">00</span>:<span id="seconds">00</span>:<span id="hundredth-sec">00</span></span>
-        </h4>
+   <div id="timer">Time Elapsed: <span id="minutes">00</span>:<span id="seconds">00</span>:<span id="hundredth-sec">00</span></div>
+        
       </div>
     </div>
   </div>
-
+<!-- Section covering the board and game buttons -->
   <div id="board">
     <div id="play-game">
+      <!-- This covers the side bar play button and name input that is initially hidden -->
       <form id="form-wrapper">
         <label class="player-name">Player 1 Name: <input id="player1" type="text" value="Player 1"
             placeholder="Player 1"></label>
@@ -34,8 +36,8 @@
         <div id="reset-wrapper">
           <button id="reset">Reset</button>
         </div>
-
       </form>
+<!-- Two buttons each for a different style game  -->
       <div id="player-wrapper">
         <button id="player-butt">Player vs. Player</button>
       </div>
@@ -43,7 +45,7 @@
         <button id="computer-butt">Player vs. Computer</button>
       </div>
     </div>
-
+<!-- the nine game board cells -->
     <div id="cell1" class="cell"></div>
     <div id="cell2" class="cell"></div>
     <div id="cell3" class="cell"></div>
@@ -55,8 +57,9 @@
     <div id="cell9" class="cell"></div>
   </div>
   <div id="placeholder"></div>
-
-  <script src="/script/script.js"></script>
+  <!-- project credit for the two creators that appears after game is over -->
+<h2 id="credit">By: Megan and Tristan</h2>
+  <script src="./script/script.js"></script>
 </body>
 
 </html>

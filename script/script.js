@@ -18,7 +18,7 @@ let p2Comp = document.getElementById("p2Comp");
 let playerTurn = document.getElementById("player-turn");
 let timer = document.getElementById("timer");
 let timeElapsed;
-
+let credit = document.getElementById("credit");
 //timer elements
 let hundredthSec = document.getElementById("hundredth-sec");
 let seconds = document.getElementById("seconds");
@@ -36,7 +36,7 @@ let cell7 = document.getElementById("cell7");
 let cell8 = document.getElementById("cell8");
 let cell9 = document.getElementById("cell9");
 
-//cell key to translate from string to variable
+//look up table to translate from string to variable
 let cellKey = {
   cell1: cell1,
   cell2: cell2,
@@ -83,7 +83,7 @@ let gameBoard = {
         currentPlayer = "X";
         playerTurn.innerHTML = "It's " + player1.value + "'s turn";
         //add this move to the player's array
-        let item = item.target;
+        let item = event.target;
         item = item.outerHTML.toString();
         item = item.slice(9, 14);
         oMoves.push(item);
@@ -117,7 +117,9 @@ let gameBoard = {
         //check to see if there is a winning combo
         checkWin();
         //trigger computer move
-        gameBoard.computerMove(event);
+        setTimeout(function () {
+          gameBoard.computerMove(event);
+        }, 1500);
       }
       //ask player to play somewhere else if the cell is not empty
       else alert("You can't play there!");
@@ -182,12 +184,14 @@ function checkWin() {
       //message if player won in less than a minute
       if (minutes.innerHTML == 00) {
         playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${seconds.innerHTML} seconds!`;
+
         //message if player won in over a minute
       } else if (minutes.innerHTML !== 0) {
         playerTurn.textContent = `Congratulations, ${player1.value}, you won!!! It took you ${minutes.innerHTML} minutes and ${seconds.innerHTML} seconds!`;
       }
       //stop the timer and show reset button
       clearInterval(timeElapsed);
+      credit.style.display = "block";
       reset.style.display = "block";
     }
     //check to see if array of player O's moves has a winning array by looping through
@@ -215,6 +219,7 @@ function checkWin() {
       }
       //stop the timer and show reset button
       clearInterval(timeElapsed);
+      credit.style.display = "block";
       reset.style.display = "block";
     }
   }
@@ -222,6 +227,7 @@ function checkWin() {
   if (totalMoves.length === 9) {
     playerTurn.textContent = "No winner :(";
     clearInterval(timeElapsed);
+    credit.style.display = "block";
     reset.style.display = "block";
   }
 }
@@ -283,37 +289,38 @@ let counter = () => {
 //Start Game
 function startFun(event) {
   event.preventDefault();
-  //computer vs player game - begin game if player entered their name 
+  //computer vs player game - begin game if player entered their name
   if (player1.value && player2.value === "Computer") {
     for (let cell of allCells) {
       //make each cell clickable
       cell.addEventListener("click", gameBoard.computerMove);
     }
+
     //display whose turn it is
-    playerTurn.style.border = "5px double #fb8500";
-    playerTurn.style.borderRadius = "5%"
+    playerTurn.style.border = "5px double #66FCF1";
+
     playerTurn.innerHTML = "It's " + player1.value + "'s turn!";
     //disable the start button
     start.disabled = true;
     //start the timer, make go off every 10/1000 = 1/100 second
     timeElapsed = setInterval(counter, 10);
-    //player vs. player game - begin when they've entered names for both players 
+    //player vs. player game - begin when they've entered names for both players
   } else if (player1.value && player2.value) {
     //turn each cell into a clickable cell
     for (let cell of allCells) {
       cell.addEventListener("click", gameBoard.playerMove);
     }
     //display whose turn it is
-    playerTurn.style.border = "5px double #fb8500";
-    playerTurn.style.borderRadius = "5%";
+    playerTurn.style.border = "5px double #66FCF1";
+
     playerTurn.innerHTML = "It's " + player1.value + "'s turn!";
     //disable the start button
     start.disabled = true;
     //start the timer, make go off every 10/1000 = 1/100 second
     timeElapsed = setInterval(counter, 10);
-    //if player doesn't enter name for player vs. player game, alert them to 
+    //if player doesn't enter name for player vs. player game, alert them to
   } else if (!player1.value && player2.value === "Computer") {
     alert("Please enter a name for Player 1!");
-    //enter a name for player 1 and player 2 if have not 
+    //enter a name for player 1 and player 2 if have not
   } else alert("Please enter a name for Player 1 and Player 2!");
 }
