@@ -168,17 +168,18 @@ let winningArrays = [
 function checkWin() {
   //check to see if the player has a winning combination - if they do, then highlight the winning cells, set an alert, and stop the timer
   //loop through the arrays
-  for (let i = 0; i < winningArrays.length; i++) {
+
+  for (let item of winningArrays) {
     //check to see if array of player X's moves has a winning array by looping through each sub-array
     if (
-      xMoves.includes(winningArrays[i][0].toString()) &&
-      xMoves.includes(winningArrays[i][1].toString()) &&
-      xMoves.includes(winningArrays[i][2].toString())
+      xMoves.includes(item[0].toString()) &&
+      xMoves.includes(item[1].toString()) &&
+      xMoves.includes(item[2].toString())
     ) {
       //identify which were the winning cells
-      let winningCell1 = winningArrays[i][0];
-      let winningCell2 = winningArrays[i][1];
-      let winningCell3 = winningArrays[i][2];
+      let winningCell1 = item[0];
+      let winningCell2 = item[1];
+      let winningCell3 = item[2];
       //change color of winning cells
       cellKey[winningCell1].style.backgroundColor = "red";
       cellKey[winningCell2].style.backgroundColor = "red";
@@ -199,14 +200,14 @@ function checkWin() {
     //check to see if array of player O's moves has a winning array by looping through
     else if (
       //check to see if array of player O's moves has a winning array by looping through each sub-array
-      oMoves.includes(winningArrays[i][0].toString()) &&
-      oMoves.includes(winningArrays[i][1].toString()) &&
-      oMoves.includes(winningArrays[i][2].toString())
+      oMoves.includes(item[0].toString()) &&
+      oMoves.includes(item[1].toString()) &&
+      oMoves.includes(item[2].toString())
     ) {
       //identify winning cells
-      let winningCell1 = winningArrays[i][0];
-      let winningCell2 = winningArrays[i][1];
-      let winningCell3 = winningArrays[i][2];
+      let winningCell1 = item[0];
+      let winningCell2 = item[1];
+      let winningCell3 = item[2];
       //change color of winning cells
       cellKey[winningCell1].style.backgroundColor = "red";
       cellKey[winningCell2].style.backgroundColor = "red";
