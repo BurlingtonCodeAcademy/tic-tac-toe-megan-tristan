@@ -1,3 +1,5 @@
+//Need to fix For Loop
+
 //---------------------variable definition-----------------------------//
 let currentPlayer = "X";
 let player1 = document.getElementById("player1");
